@@ -2,7 +2,7 @@ module Billable
   extend ActiveSupport::Concern
 
   included do
-    after_create :setup_stripe_customer
+    # after_create :setup_stripe_customer
   end
 
   # done after signup for easy CVR metrics via Stripe UI

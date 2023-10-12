@@ -18,7 +18,6 @@ gem 'puma', '6.4.0'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'rails', '7.1.0'
 gem 'redis'
-gem 'rename', '1.1.3', git: 'https://github.com/ryanckulp/rename' # remove this gem after use
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'stripe'

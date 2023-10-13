@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :widgets
   root 'pages#home'
 
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_up: 'signup' }
@@ -32,4 +31,7 @@ Rails.application.routes.draw do
     # convenience helper
     get 'admin', to: 'admin/dashboard#index'
   end
+
+  resources :widgets, except: [:show]
+
 end

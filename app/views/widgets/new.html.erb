@@ -1,7 +1,12 @@
 <div class="mx-auto md:w-2/3 w-full">
   <h1 class="font-bold text-4xl">New widget</h1>
 
-  <%= render "form", widget: @widget %>
-
-  <%= link_to 'Back to widgets', widgets_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <div class="flex">
+    <div class="basis-1/2">
+      <%= render "form", widget: @widget %>
+    </div>
+    <div class="basis-1/2">
+      LIVE PREVIEW HERE
+    </div>
+  </div>
 </div>

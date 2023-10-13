@@ -13,37 +13,59 @@
 
   <div class="my-5">
     <%= form.label :name %>
-    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.text_field :name, placeholder: 'Personal blog', class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <small>This won't be shown to your visitors.</small>
   </div>
 
   <div class="my-5">
     <%= form.label :welcome_message %>
-    <%= form.text_field :welcome_message, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.text_field :welcome_message, placeholder: 'Send me a note', class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :background_color %>
-    <%= form.text_field :background_color, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :background_color %><br>
+    <%= form.color_field :background_color %>
   </div>
 
   <div class="my-5">
-    <%= form.label :shape %>
-    <%= form.text_field :shape, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :shape %><br>
+
+    <span onclick="setShape(this)" class="circle mr-2 cursor-pointer <%= maybe_preselect(widget, 'circle') %>" data-shape="circle"></span>
+    <span onclick="setShape(this)" class="square mr-2 cursor-pointer <%= maybe_preselect(widget, 'square') %>" data-shape="square"></span>
+    <span onclick="setShape(this)" class="rectangle mr-2 cursor-pointer <%= maybe_preselect(widget, 'rectangle') %>" data-shape="rectangle"></span>
+
+    <script type="text/javascript">
+      function setShape(el) {
+        resetSelectedShape();
+
+        let shape = el.dataset.shape;
+        el.classList.add('shape-selected');
+        document.getElementById('widget_shape').value = shape;
+      }
+
+      function resetSelectedShape() {
+        Array.from(document.getElementsByClassName('shape-selected')).forEach(function(el) {
+          el.classList.remove('shape-selected');
+        })
+      }
+    </script>
+
+    <%= form.text_field :shape, type: "hidden" %>
   </div>
 
   <div class="my-5">
     <%= form.label :location %>
-    <%= form.text_field :location, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :location, [['Bottom Right', 'bottom_right'], ['Bottom Left', 'bottom_left']], {}, class: "mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :avatar %><br>
+    <%= form.file_field :avatar %>
   </div>
 
   <div class="my-5">
     <%= form.label :enabled %>
     <%= form.check_box :enabled, class: "block mt-2 h-5 w-5" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">

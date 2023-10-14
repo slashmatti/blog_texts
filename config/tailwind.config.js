@@ -15,7 +15,8 @@ module.exports = {
       },
       // custom color palette for branding, see https://tailwindcss.com/docs/customizing-colors
       colors: {
-        primary: colors.lime
+        primary: colors.lime,
+        'brand-blue': 'blue'
       }
     },
   },

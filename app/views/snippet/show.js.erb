@@ -19,6 +19,7 @@ var BlogTextsWidget = {
 
     showForm: function() {
         document.body.insertAdjacentHTML('beforeend', this.formHtml);
+        document.getElementById('new_message').addEventListener('submit', this.submitForm);
         this.hideIcon();
         let closeButton = document.getElementById('blog_text_close');
         closeButton.addEventListener('click', this.hideForm.bind(this));
@@ -34,18 +35,27 @@ var BlogTextsWidget = {
     },
 
     sendMessage: function() { // maybe unnecessary
-
     },
 
     showIcon: function() {
         let icon = document.createElement('span');
         icon.id = 'blog_text_icon';
         icon.addEventListener('click', this.showForm.bind(this));
-        // icon.addEventListener('click', this.hideIcon.bind(this));
 
         Object.assign(icon.style, this.circleStyles);
 
         document.body.append(icon);
+    },
+
+    submitForm: function(e) {
+        e.preventDefault();
+        let form = e.target;
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form)
+        }).then((response) => {
+            console.log('success response received! hide the form and show a thanks you message now');
+        })
     }
 }
 

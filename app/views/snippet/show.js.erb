@@ -2,27 +2,35 @@ var BlogTextsWidget = {
     circleStyles: { backgroundColor: 'black', height: '50px', width: '50px', borderRadius: '50%', position: 'absolute', bottom: '10px', right: '10px', cursor: 'pointer' },
     welcome_message: 'Send me a note!', // TODO: get these from the database
     formHtml: '<%= j render "form" %>',
+    cssStyles: '<%= asset_url("tailwind.css") %>',
 
     init: function() {
         console.log('widget initialized');
         this.showIcon();
+        this.plantCss();
+    },
+
+    plantCss: function() {
+        let stylesheet = document.createElement('link');
+        stylesheet.rel = 'stylesheet';
+        stylesheet.href = this.cssStyles;
+        document.head.append(stylesheet);
     },
 
     showForm: function() {
         document.body.insertAdjacentHTML('beforeend', this.formHtml);
         this.hideIcon();
-
+        let closeButton = document.getElementById('blog_text_close');
+        closeButton.addEventListener('click', this.hideForm.bind(this));
     },
 
     hideForm: function() {
         document.getElementById('blog_text_widget').remove();
         this.showIcon();
-
     },
 
     hideIcon: function() {
         document.getElementById('blog_text_icon').remove();
-
     },
 
     sendMessage: function() { // maybe unnecessary

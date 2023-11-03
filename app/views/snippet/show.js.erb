@@ -54,7 +54,10 @@ var BlogTextsWidget = {
             method: 'POST',
             body: new FormData(form)
         }).then((response) => {
-            console.log('success response received! hide the form and show a thanks you message now');
+            var thanks = document.createElement('p');
+            thanks.textContent = 'Thanks! Your message has been sent.';
+            var form = document.getElementById('new_message');
+            form.appendChild(thanks);
         })
     }
 }

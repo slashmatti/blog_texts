@@ -2,6 +2,7 @@ var BlogTextsWidget = {
     circleStyles: { backgroundColor: 'black', height: '50px', width: '50px', borderRadius: '50%', position: 'absolute', bottom: '10px', right: '10px', cursor: 'pointer' },
     welcome_message: 'Send me a note!', // TODO: get these from the database
     formHtml: '<%= j render "form" %>',
+    formId: 'new_message',
     cssStyles: '<%= asset_url("tailwind.css") %>',
 
     init: function() {
@@ -23,6 +24,7 @@ var BlogTextsWidget = {
         this.hideIcon();
         let closeButton = document.getElementById('blog_text_close');
         closeButton.addEventListener('click', this.hideForm.bind(this));
+        this.enableAutosave();
     },
 
     hideForm: function() {
@@ -47,6 +49,24 @@ var BlogTextsWidget = {
         document.body.append(icon);
     },
 
+    enableAutosave: function() {
+        ['name', 'email'].forEach(function(formField) {
+            // attach autosave functionality to name, email form fields
+            let fieldEl = document.getElementById('message_' + formField);
+      
+            fieldEl.addEventListener('change', function() {
+              localStorage.setItem('BlogTextWidget' + '_' + formField, fieldEl.value);
+            })
+      
+            // retrieve existing autosaved value; if exists, prefill input
+            let savedValue = localStorage.getItem('BlogTextWidget' + '_' + formField);
+      
+            if (savedValue != null) {
+              fieldEl.value = savedValue;
+            }
+          })
+        },
+
     submitForm: function(e) {
         e.preventDefault();
         let form = e.target;
@@ -56,8 +76,13 @@ var BlogTextsWidget = {
         }).then((response) => {
             var thanks = document.createElement('p');
             thanks.textContent = 'Thanks! Your message has been sent.';
+            thanks.classList.add('bg-white');
+            // debugger;
             var form = document.getElementById('new_message');
             form.appendChild(thanks);
+            setTimeout(() => {
+                BlogTextsWidget.hideForm();
+              }, 5000);
         })
     }
 }

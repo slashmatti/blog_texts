@@ -4,7 +4,7 @@
       <%= link_to widget.name, edit_widget_path(widget), class: 'underline text-blue-600' %>
     </td>
     <td class="w-full">
-      <input class="w-full" type="text" readonly name="" value="<script src='<%= ENV['BASE_URL'] %>/widget.js?client_id=<%= widget.client_id %>'></script>">
+      <input class="w-full" type="text" readonly name="" value="<%= snippet_code(widget) %>">
     </td>
 
     <td>

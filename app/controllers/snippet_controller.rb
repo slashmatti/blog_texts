@@ -3,11 +3,14 @@ class SnippetController < ApplicationController
     before_action :set_snippet
 
     def show
+        if @widget.nil?
+            head :ok
+        end
     end
 
     private
 
     def set_snippet
-        @widget = Widget.find_by(client_id: params[:id])
+        @widget = Widget.find_by(client_id: params[:client_id])
     end
 end

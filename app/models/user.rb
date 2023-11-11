@@ -6,4 +6,5 @@ class User < ApplicationRecord
   scope :subscribed, -> { where.not(stripe_subscription_id: [nil, '']) }
 
   has_many :widgets, dependent: :destroy
+  has_many :messages, through: :widgets
 end

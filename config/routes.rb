@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   end
 
   resources :widgets, except: [:show]
-  resources :messages, only: [:create]
+  resources :messages, only: [:index, :create]
   get 'snippet', to: 'snippet#show'
 
 end

@@ -53,11 +53,16 @@ var BlogTextsWidget = {
         // 3. set form location
         let widget = document.getElementById('blog_text_widget');
         let offset = '20px';
+        widget.style.bottom = offset;
+        
         if (self.location == 'bottom_right') {
             widget.style.right = offset;
         } else if (self.location == 'bottom_left') {
             widget.style.left = offset;
-        }        
+        }
+
+        // 4. set focus
+        document.getElementById('message_name').focus();
     },
 
     hideForm: function() {

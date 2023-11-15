@@ -7,8 +7,10 @@
       <%= link_to "Back to widgets", widgets_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     </div>
     <div class="basis-1/2">
-      LIVE PREVIEW HERE
+      <span>Preview of your widget</span>
+      <%= render "snippet/form" %>
     </div>
   </div>
-
 </div>
+
+<%= render "live_preview_js" %>

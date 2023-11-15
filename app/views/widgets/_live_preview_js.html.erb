@@ -1,0 +1,38 @@
+<script type="text/javascript">
+  function previewWelcomeMessage(el) {
+    document.getElementById('blog_text_widget_welcome_message').innerText = el.value;
+  }
+
+  function previewBackgroundColor(colorPicker) {
+    Array.from(document.getElementsByClassName('blog_text_widget_background_color')).forEach(function(el) {
+      el.style.backgroundColor = colorPicker.value;
+    });
+  }
+
+  function disableForm() {
+    document.getElementById('message_name').disabled = true;
+    document.getElementById('message_email').disabled = true;
+    document.getElementById('message_content').disabled = true;
+    document.getElementById('message_submit').disabled = true;
+  }
+
+  function setDefaults() {
+    let welcomeMessage = document.getElementById('widget_welcome_message');
+
+    if (welcomeMessage.value == '') {
+      welcomeMessage.value = 'Drop me a line';
+    }
+    previewWelcomeMessage(welcomeMessage);
+
+    let backgroundColor = document.getElementById('widget_background_color');
+
+    if (backgroundColor.value == '#000000') { // nil picker will be black
+    backgroundColor.value = '#249315';
+    }
+
+    previewBackgroundColor(backgroundColor);
+  }
+
+  disableForm();
+  setDefaults();
+</script>

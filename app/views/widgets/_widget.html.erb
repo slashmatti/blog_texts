@@ -4,11 +4,11 @@
       <%= link_to widget.name, edit_widget_path(widget), class: 'underline text-blue-600' %>
     </td>
     <td class="w-full">
-      <input class="w-full" type="text" readonly name="" value="<%= snippet_code(widget) %>">
+      <input id="widget_<%= widget.id %>_snippet" class="w-full" type="text" readonly name="" value="<%= snippet_code(widget) %>">
     </td>
 
     <td>
-      <%= link_to 'Copy', '#', class: "rounded-lg py-2 px-3 bg-blue-600 text-white block text-sm" %>
+      <%= link_to 'Copy', '#', onclick: "copySnippet(#{widget.id})", class: "rounded-lg py-2 px-3 bg-blue-600 text-white block text-sm" %>
     </td>
 
     <td>
@@ -18,3 +18,49 @@
     </td>
   </div>
 </tr>
+<script type="text/javascript">
+  function copySnippet(widgetId) {
+    // Get the text field
+    var snippet = document.getElementById("widget_" + widgetId + "_snippet");
+    // Pass it to the copy sequence
+    copyTextToClipboard(snippet.value);
+    alert('Snippet was copied!');
+  }
+
+  function copyTextToClipboard(text) {
+    if (!navigator.clipboard) {
+      fallbackCopyTextToClipboard(text);
+      return;
+    }
+    
+    navigator.clipboard.writeText(text).then(function() {
+      console.log('Async: Copying to clipboard was successful!');
+    }, function(err) {
+    console.error('Async: Could not copy text: ', err);
+    });
+  }
+
+  function fallbackCopyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+
+    // Avoid scrolling to bottom
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      var successful = document.execCommand('copy');
+      var msg = successful ? 'successful' : 'unsuccessful';
+      console.log('Fallback: Copying text command was ' + msg);
+    } catch (err) {
+      console.error('Fallback: Oops, unable to copy', err);
+  }
+
+  document.body.removeChild(textArea);
+}
+</script>

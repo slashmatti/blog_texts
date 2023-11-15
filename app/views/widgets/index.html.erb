@@ -5,21 +5,21 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div id="widgets" class="max-w-3xl mx-auto">
-    <table>
-      <thead class="font-bold text-left">
+  <div id="widgets" class="max-w-4xl mx-auto">
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="">
         <tr>
-          <th>Name</th>
-          <th>Snippet</th>
-          <th></th>
-          <th></th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Name</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Snippet</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="divide-y divide-gray-200 bg-white">
         <%= render @widgets %>
       </tbody>
     </table>
-    <div class="flex justify-between items-center">
+    <div class="mt-4 flex justify-between items-center">
       <%= link_to 'New widget', new_widget_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
     </div>
   </div>

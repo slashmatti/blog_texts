@@ -1,5 +1,5 @@
 <tr>
-  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= widget.name %></td>
+  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= link_to widget.name, edit_widget_path(widget), class: 'text-brand-blue underline' %></td>
     <td class="w-full whitespace-nowrap px-3 py-4 text-sm text-gray-500">
       <input id="widget_<%= widget.id %>_snippet" class="w-full" type="text" readonly name="" value="<%= snippet_code(widget) %>">
     </td>

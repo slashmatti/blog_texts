@@ -1,14 +1,15 @@
 class WidgetsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_widget, only: %i[ edit update destroy ]
 
   # GET /widgets or /widgets.json
   def index
-    @widgets = Widget.all
+    @widgets = current_user.widgets
   end
 
   # GET /widgets/new
   def new
-    @widget = Widget.new
+    @widget = current_user.widgets.new
   end
 
   # GET /widgets/1/edit
@@ -21,7 +22,7 @@ class WidgetsController < ApplicationController
 
     respond_to do |format|
       if @widget.save
-        format.html { redirect_to widget_url(@widget), notice: "Widget was successfully created." }
+        format.html { redirect_to widget_path(@widget), notice: "Widget was successfully created." }
         format.json { render :show, status: :created, location: @widget }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -56,11 +57,11 @@ class WidgetsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_widget
-      @widget = Widget.find(params[:id])
+      @widget = current_user.widgets.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def widget_params
-      params.require(:widget).permit(:name, :welcome_message, :background_color, :shape, :location, :enabled, :user_id)
+      params.require(:widget).permit(:name, :welcome_message, :background_color, :shape, :location, :enabled, :avatar)
     end
 end

@@ -23,6 +23,11 @@
           </div>
 
           <div class="mb-2 border border-gray-300 rounded-md px-3 py-2">
+            <label for="phone" class="block text-xs font-medium text-gray-900">Phone Number</label>
+            <input type="tel" required="true" name="user[phone]" id="user_phone" value="<%= current_user.phone %>" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="0677022324">
+          </div>
+
+          <div class="mb-2 border border-gray-300 rounded-md px-3 py-2">
             <label for="password" class="block text-xs font-medium text-gray-900">Password</label>
             <input type="password" autocomplete="new-password" name="user[password]" id="user_password" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm">
           </div>

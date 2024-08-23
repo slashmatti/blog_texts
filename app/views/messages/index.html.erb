@@ -1,5 +1,5 @@
 <div class="px-4 sm:px-6 lg:px-8">
-    <%= render partial: "shared/heading", locals: {title: "Messages", tagline: "Below are recent messages you've received from website visitors."} %>
+    <%= render partial: "shared/heading", locals: {title: "Messages (#{@messages.count})", tagline: "Below are recent messages you've received from website visitors."} %>
     
     <div class="text-right">
       <a href="<%= messages_path(format: 'csv') %>" class="underline text-brand-blue">Export CSV</a>

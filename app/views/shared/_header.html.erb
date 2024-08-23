@@ -1,7 +1,7 @@
 <header class="py-4 px-2" data-controller="header">
   <nav class="flex items-center justify-between flex-wrap">
     <div class="flex items-center flex-no-shrink text-white mr-6">
-      <% logo_path = current_user ? dashboard_index_path : root_path %>
+      <% logo_path = current_user ? dashboard_path : root_path %>
       <%= link_to logo_path do %>
         <%= image_tag "avatar.png",  style: "max-height: 42px" %>
       <% end %>
@@ -19,7 +19,7 @@
       <div class="text-sm sm:flex-grow">
         <% if current_user %>
           <%= link_to 'Admin', admin_dashboard_index_path, class: nav_link_classes('admin/dashboard') if current_user.admin? %>
-          <%= link_to 'Widgets', widgets_path, class: nav_link_classes('dashboard') %>
+          <%= link_to 'Dashboard', dashboard_path, class: nav_link_classes('dashboard') %>
           <%= link_to 'Messages', messages_path, class: nav_link_classes('dashboard') %>
           <%= link_to 'Account', account_index_path, class: nav_link_classes('account') %>
           <%= link_to 'Logout', logout_path, class: nav_link_classes %>

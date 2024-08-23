@@ -6,6 +6,7 @@ var BlogTextsWidget = {
     },
     welcomeMessage: '<%= @widget.welcome_message %>',
     backgroundColor: '<%= @widget.background_color %>',
+    enabled: <%= @widget.enabled %>,
     shape: '<%= @widget.shape %>',
     location: '<%= @widget.location %>',
     formHtml: '<%= j render "form" %>',
@@ -13,8 +14,10 @@ var BlogTextsWidget = {
     cssStyles: '<%= asset_url("tailwind.css") %>',
 
     init: function() {
-        this.showIcon();
-        this.plantCss();
+        if (this.enabled) {
+            this.showIcon();
+            this.plantCss();
+        }
     },
 
     plantCss: function() {

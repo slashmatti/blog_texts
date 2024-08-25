@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   before_action :authenticate_user!, only: [:logout]
 
   def home; end
+  def pricing; end
 
   def logout
     sign_out(current_user)

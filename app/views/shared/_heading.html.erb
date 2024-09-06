@@ -1,6 +1,7 @@
-<div class="sm:flex sm:items-center">
+<% extra_classes ||= '' %>
+<div class="sm:flex sm:items-center <%= extra_classes %>">
   <div class="sm:flex-auto">
     <h1 class="text-base font-semibold leading-6 text-gray-900"><%= title %></h1>
-    <p class="mt-2 text-sm text-gray-700"><%= tagline %></p>
+    <p class="mt-2 text-sm text-gray-700"><%= tagline.html_safe %></p>
   </div>
 </div>

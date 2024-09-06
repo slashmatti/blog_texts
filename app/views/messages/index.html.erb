@@ -1,11 +1,18 @@
 <div class="px-4 sm:px-6 lg:px-8">
+  <% if @messages.count.zero? %>
+    <%= render partial: "shared/heading", locals: {
+      title: "You have no messages!",
+      tagline: "Copy your snippet from the dashboard, paste it in any website's HTML, and messages will appear here.<br>
+                To receive a free text whenever visitors fill out your form, add a phone number to #{link_to 'your Account', account_index_path, class: 'underline text-brand-blue' } page.", extra_classes: 'text-center'
+      } %>
+  <% else %>
     <%= render partial: "shared/heading", locals: {title: "Messages (#{@messages.count})", tagline: "Below are recent messages you've received from website visitors."} %>
     
-    <div class="text-right">
-      <a href="<%= messages_path(format: 'csv') %>" class="underline text-brand-blue">Export CSV</a>
-    </div>
+  <div class="text-right">
+    <a href="<%= messages_path(format: 'csv') %>" class="underline text-brand-blue">Export CSV</a>
+  </div>
 
-    <div class="mt-8 flow-root">
+  <div class="mt-8 flow-root">
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
         <table class="min-w-full divide-y divide-gray-300">
@@ -31,4 +38,5 @@
       </div>
     </div>
   </div>
+  <% end %>
 </div>

@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<script src="http://localhost:3000/snippet.js?client_id=593465b6f6"></script>
+<script src="<%= ENV['base_url'] %>/snippet.js?client_id=<%= Widget.first.client_id %>"></script>
 
 <script type="text/javascript">
   function tryIt() {

@@ -1,5 +1,6 @@
 class WidgetsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_flashes, only: [:index]
   before_action :set_widget, only: %i[ edit update destroy ]
 
   # GET /widgets or /widgets.json
@@ -54,13 +55,22 @@ class WidgetsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_widget
-      @widget = current_user.widgets.find(params[:id])
+  # invoked after someone subscribes
+  def set_flashes
+    if params[:subscribed] == 'true'
+      current_user.set_stripe_subscription
+      current_user.update(paying_customer: true)
+      flash.now[:notice] = 'Your Pro Plan is now active!'
     end
+  end
 
-    # Only allow a list of trusted parameters through.
-    def widget_params
-      params.require(:widget).permit(:name, :welcome_message, :background_color, :shape, :location, :enabled, :avatar)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_widget
+    @widget = current_user.widgets.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def widget_params
+    params.require(:widget).permit(:name, :welcome_message, :background_color, :shape, :location, :enabled, :avatar)
+  end
 end

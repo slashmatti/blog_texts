@@ -1,4 +1,6 @@
-var BlogTextsWidget = {
+<% widgetName = 'BlogTextsWidget' %>
+
+var <%= widgetName %> = {
     iconStyles: {
         circle: { backgroundColor: '<%= @widget.background_color %>', height: '50px', width: '50px', borderRadius: '50%', position: 'absolute', bottom: '10px', cursor: 'pointer' },
         square: { backgroundColor: '<%= @widget.background_color %>', height: '50px', width: '50px', position: 'absolute', bottom: '10px', cursor: 'pointer' },
@@ -12,6 +14,7 @@ var BlogTextsWidget = {
     formHtml: '<%= j render "form" %>',
     formId: 'new_message',
     cssStyles: '<%= asset_url("tailwind.css") %>',
+    thankYouHtml: '<p id="<%= widgetName %>_thank_you" class="py-4 px-4"><%= @widget.thanks_message %></p>',
 
     init: function() {
         if (this.enabled) {
@@ -123,18 +126,23 @@ var BlogTextsWidget = {
             let fieldEl = document.getElementById('message_' + formField);
       
             fieldEl.addEventListener('change', function() {
-              localStorage.setItem('BlogTextWidget' + '_' + formField, fieldEl.value);
+              localStorage.setItem('<%= widgetName %>' + '_' + formField, fieldEl.value);
             })
       
             // retrieve existing autosaved value; if exists, prefill input
-            let savedValue = localStorage.getItem('BlogTextWidget' + '_' + formField);
+            let savedValue = localStorage.getItem('<%= widgetName %>' + '_' + formField);
       
             if (savedValue != null) {
               fieldEl.value = savedValue;
             }
           })
         },
-        
+
+        showThankYou: function() {
+            document.getElementById(this.formId).innerHTML = this.thankYouHtml;
+            setTimeout(this.hideForm.bind(this), 4000);
+          },
+
         submitForm: function(e) {
             e.preventDefault();
             let form = e.target;
@@ -142,16 +150,9 @@ var BlogTextsWidget = {
                 method: 'POST',
                 body: new FormData(form)
             }).then((response) => {
-                var thanks = document.createElement('p');
-                thanks.textContent = 'Thanks! Your message has been sent.';
-                thanks.classList.add('bg-white');
-                var form = document.getElementById('new_message');
-                form.appendChild(thanks);
-                setTimeout(() => {
-                    BlogTextsWidget.hideForm();
-                }, 5000);
+                <%= widgetName %>.showThankYou();
             })
         }
 }
 
-BlogTextsWidget.init();
+<%= widgetName %>.init();

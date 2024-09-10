@@ -23,8 +23,19 @@
   </div>
 
   <div class="my-5">
+    <%= form.label :thanks_message %>
+    <%= form.text_field :thanks_message, placeholder: 'Thanks for your message!', onkeyup: 'previewThanksMessage(this)', class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <small>Shown to your visitors after they submit a message.</small>
+  </div>
+
+  <div class="my-5">
     <%= form.label :background_color %><br>
     <%= form.color_field :background_color, onchange: 'previewBackgroundColor(this)' %>
+  </div>
+  
+  <div class="my-5">
+    <%= form.label :font_color %><br>
+    <%= form.color_field :font_color, onchange: 'previewFontColor(this)' %>
   </div>
 
   <div class="my-5">

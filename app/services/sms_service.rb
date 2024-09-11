@@ -4,7 +4,7 @@ class SmsService
     end
 
     def send_text!
-        params = {number: '', message: body}
+        params = {number: message.user.phone, message: body}
         resp = HTTParty.get(ENV['sms_server'], body: params)
         JSON.parse(resp.body)
     end

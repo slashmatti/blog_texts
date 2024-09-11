@@ -15,7 +15,7 @@
 
   function previewFontColor(colorPicker) {
     Array.from(document.getElementsByClassName('blog_text_widget_font_color')).forEach(function(el) {
-      el.style.backgroundColor = colorPicker.value;
+      el.style.color = colorPicker.value;
     });
   }
 
@@ -46,8 +46,14 @@
     if (backgroundColor.value == '#000000') { // nil picker will be black
     backgroundColor.value = '#249315';
     }
-
     previewBackgroundColor(backgroundColor);
+
+    let fontColor = document.getElementById('widget_font_color');
+
+    if (fontColor.value == '#000000') { // nil picker will be black
+    fontColor.value = '#249315';
+    }
+    previewFontColor(fontColor);
   }
 
   function showThanks() {

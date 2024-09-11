@@ -5,7 +5,7 @@ class WidgetsController < ApplicationController
 
   # GET /widgets or /widgets.json
   def index
-    @widgets = current_user.widgets
+    @widgets = current_user.widgets.order(created_at: :asc)
   end
 
   # GET /widgets/new

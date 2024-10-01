@@ -1,24 +1,18 @@
-# Unidentified Feedback
-simple app that turns anonymous feedback into [Tweets](https://twitter.com/unidentified_ft) for all to see. developed at [24 Hour MVP](https://founderhacker.com/24-hour-mvp).
+# BlogTexts
+app for users to create widgets to put on their websites, allowing visitors to send them SMS messages. developed at [24 Hour MVP](https://founderhacker.com/24-hour-mvp).
 
 ## Installation
 1. clone the repo
 2. `cd <project> && bundle`
 3. `rails db:setup && rails db:migrate`
 4. `bundle exec figaro install`
-5. `cp config/application-sample.yml config/application.yml` and set values**
+5. `cp config/application-sample.yml config/application.yml` 
 
-** Stripe configs are optional; leave them as-is to ignore this feature. To test the mailer,  `admin_email` and `admin_password` must belong to a Gmail account.
 
 ## Development
 ```
 bin/dev # uses foreman gem to boot server + frontend
 ```
-
-**Troubleshooting**
-
-`Application-specific password required. Learn more at (Net::SMTPAuthenticationError)`
-you likely have 2-factor auth enabled on your supplied Gmail account. Make an app-specific password [here](https://security.google.com/settings/security/apppasswords) or learn more [here](https://stackoverflow.com/a/28596570).
 
 ## Deploying
 install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) and run `heroku login`. if repo admin has shared access to the server:
@@ -38,4 +32,4 @@ to add or update environment variables from your local `config/application.yml` 
 ```
 figaro heroku:set -e production
 ```
-you will need X/Twitter Developer access, and then put in your API credentials as environment variables
+you will need Stripe and Postmark accounts, and then put in your API credentials as environment variables. you will need to [deploy a Textbelt server](https://github.com/founderhacker/textbelt_deployable)
